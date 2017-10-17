@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Js速度动画</title>
+    <style>
+        body,div,span{
+            margin:0;
+            padding:0;
+        }
+        #dv{
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            position: relative;
+            left: -200px;
+            top:0;
+        }
+        #dv span{
+            width: 20px;
+            height: 50px;
+            background-color: blue;
+            position: absolute;
+            left: 200px;
+            top: 75px;
+            color: #fff;
+        }
+    </style>
+
+    <script>
+        window.onload = function () {
+            var oDv = document.getElementById('dv');
+            oDv.onmouseover = function () {
+                startMove(0);
+            };
+            oDv.onmouseout = function () {
+                startMove(-200);
+            }
+        };
+
+        var timer = null;
+        function startMove(obj) {
+            clearInterval(timer);
+            var oDv = document.getElementById('dv');
+            timer = setInterval(function () {
+                var speed = 0;
+                if(oDv.offsetLeft > obj){  //oDv.offsetLeft当前值
+                    speed = -10;
+                }else {
+                    speed = 10;
+                }
+                if (oDv.offsetLeft === obj){
+                    clearInterval(timer)
+                }else{
+                    oDv.style.left = oDv.offsetLeft + speed +'px';
+                }
+            },30)
+        }
+    </script>
+</head>
+<body>
+<div id="dv"><span id="share">分享</span></div>
+</body>
+</html>

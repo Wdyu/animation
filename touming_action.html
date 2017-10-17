@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Js透明度动画</title>
+    <style>
+        body,div{
+            margin:0;
+            padding:0;
+        }
+        div{
+            width: 200px;
+            height: 100px;
+            background-color: red;
+            filter:alpha(opacity:30);
+            opacity:0.3;
+            margin-bottom:10px;
+        }
+    </style>
+
+    <script>
+        window.onload = function () {
+//            var oDv = document.getElementById('dv');
+            var oDv = document.getElementsByTagName('div');
+            for(var i= 0;i<oDv.length;i++){
+                oDv[i].alpha = 30;
+                oDv[i].onmouseover = function () {
+                    startMove(this,100);
+                };
+                oDv[i].onmouseout = function () {
+                    startMove(this,30);
+                }
+            }
+        };
+
+//        var timer = null;
+//        var alpha = 30;
+        function startMove(argument,obj) {
+            clearInterval(argument.timer);
+            argument.timer = setInterval(function () {
+                var speed = 0;
+                if(argument.alpha > obj){  //oDv.offsetLeft当前值
+                    speed = -10;
+                }else {
+                    speed = 10;
+                }
+                if (argument.alpha === obj){
+                    clearInterval(argument.timer)
+                }else{
+                    argument.alpha += speed;
+                    argument.style.filter = 'alpha(opacity:'+ argument.alpha +')';
+                    argument.style.opacity = argument.alpha/100;
+                }
+            },30)
+        }
+    </script>
+</head>
+<body>
+<div id="dv1"></div>
+<div id="dv2"></div>
+<div id="dv3"></div>
+<div id="dv4"></div>
+</body>
+</html>
