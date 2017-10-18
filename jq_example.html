@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Js动画案例</title>
+    <title>jQuery动画效果</title>
     <style>
         body,div,a,p,i,img{
             margin:0;
@@ -49,21 +49,16 @@
         }
     </style>
 
-    <script src="js/moveMore.js"></script>
+    <script src="js/jquery.js"></script>
     <script>
-        window.onload = function () {
-            var oMove = document.getElementById('move'),
-                oA = oMove.getElementsByTagName('a');
-            for(var i= 0; i< oA.length;i++){
-                oA[i].onmouseover = function () {
-                    var _this = this.getElementsByTagName('i')[0];
-                    startMove(_this,{top:-20,opacity:0},function () {
-                        _this.style.top = 20 + 'px';
-                        startMove(_this,{top:15,opacity:100})
-                    })
-                };
-            }
-        }
+        $(function () {
+            $("#move a").mouseenter(function () {
+                $(this).find('i').animate({top:'-20px',opacity:'0'},300,function () {
+                    $(this).css({top:'20px'});
+                    $(this).animate({top:'15px',opacity:'1'})
+                })
+            });
+        })
     </script>
 </head>
 <body>

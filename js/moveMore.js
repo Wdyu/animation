@@ -6,11 +6,11 @@ function getStyle(argument,attr) {
     }
 }
 
-// startMove(argument,{attr1:obj,attr2:obj},fn);
+// startMove(argument,{attr1:obj,attr2:obj},fn);  --obj目标值
 function startMove(argument,json,fn) {
-    var flag = true;  //假设所有运动都达到目标值
     clearInterval(argument.timer);
     argument.timer = setInterval(function () {
+        var flag = true;  //假设所有运动都达到目标值
         for (var attr in json) {
             var icur = 0;
             if (attr === 'opacity') {
@@ -19,10 +19,11 @@ function startMove(argument,json,fn) {
                 icur = parseInt(getStyle(argument, attr));
             }
 
-            var speed = (json[attr] - icur) / 8;
+            //算速度
+            var speed = (json[attr] - icur)/8;
             speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
             //检测停止
-            if (icur != json[attr]) {
+            if (icur !== json[attr]) {
                 flag = false;
             }
             if (attr === 'opacity') {
@@ -35,7 +36,7 @@ function startMove(argument,json,fn) {
         if(flag){
             clearInterval(argument.timer);
             if(fn){
-                fn()
+                fn();
             }
         }
     },30)

@@ -16,6 +16,7 @@ function startMove(argument,attr,obj,fn) {
             icur = parseInt(getStyle(argument,attr));
         }
 
+        //算速度
         var speed = (obj - icur)/8;
         speed = speed>0 ? Math.ceil(speed):Math.floor(speed);
         //检测停止
